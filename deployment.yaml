@@ -1,0 +1,21 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-anirudhteam
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      name: hello-anirudhteam
+  template:
+    metadata:
+      labels:
+        name: hello-anirudhteam
+    spec:
+      containers:
+      - name: application
+        image: anirudhteam/hello-anirudhteam
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 3000

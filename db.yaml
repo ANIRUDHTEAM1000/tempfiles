@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mariadb_rpay
+spec:
+  ports:
+  - port: 3306
+  selector:
+    app: mariadb_rpay
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mariadb_rpay
+spec:
+  selector:
+    matchLabels:
+      app: mariadb_rpay
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mariadb_rpay
+    spec:
+      containers:
+      - image: mariadb
+        name: mariadb_rpay
+        env:
+          # Use secret in real usage
+        - name: admin
+          value: Team@1000
+        ports:
+        - containerPort: 3306
+          name: mariadb_rpay
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql-pv-claim

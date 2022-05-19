@@ -2,20 +2,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-anirudhteam
+  name: today
 spec:
   replicas: 5
   selector:
     matchLabels:
-      name: hello-anirudhteam
+      name: today
   template:
     metadata:
       labels:
-        name: hello-anirudhteam
+        name: today
     spec:
       containers:
       - name: application
-        image: anirudhteam/hello-anirudhteam
+        image: anirudhteam/today
         imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 3000

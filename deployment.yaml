@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: today
 spec:
-  replicas: 5
+  replicas: 1
   selector:
     matchLabels:
       name: today
